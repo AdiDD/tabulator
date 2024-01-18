@@ -1,4 +1,4 @@
-/* Tabulator v5.5.2 (c) Oliver Folkerd 2023 */
+/* Tabulator v5.5.2 (c) Oliver Folkerd 2024 */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
@@ -1483,7 +1483,7 @@
 		}
 
 		getHeight(){
-			return Math.ceil(this.element.getBoundingClientRect().height);
+			return this.element.offsetHeight;
 		}
 
 		setMinWidth(minWidth){
@@ -5655,7 +5655,7 @@
 			let resized = false;
 			
 			if(this.renderer.verticalFillMode === "fill"){
-				let otherHeight =  Math.floor(this.table.columnManager.getElement().getBoundingClientRect().height + (this.table.footerManager && this.table.footerManager.active && !this.table.footerManager.external ? this.table.footerManager.getElement().getBoundingClientRect().height : 0));
+				let otherHeight =  this.table.columnManager.getElement().offsetHeight + (this.table.footerManager && this.table.footerManager.active && !this.table.footerManager.external ? this.table.footerManager.getElement().offsetHeight : 0);
 				
 				if(this.fixedHeight){
 					minHeight = isNaN(this.table.options.minHeight) ? this.table.options.minHeight : this.table.options.minHeight + "px";
@@ -7210,7 +7210,7 @@
 
 	//resize columns to fit
 	function fitColumns(columns, forced){
-		var totalWidth = this.table.rowManager.element.getBoundingClientRect().width; //table element width
+		var totalWidth = this.table.rowManager.element.offsetWidth; //table element width
 		var fixedWidth = 0; //total width of columns with a defined width
 		var flexWidth = 0; //total width available to flexible columns
 		var flexGrowUnits = 0; //total number of widthGrow blocks across all columns
